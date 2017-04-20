@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
   std::cout << "DISCLAIMER: USE THE SOFTWARE AT YOUR OWN RISK\n" << std::endl;
   std::locale mylocale("");
   // load the parameters
-  Parameters params("blackbird.conf");
+  Parameters params("/etc/blackbird/blackbird.conf");
   if (!params.demoMode) {
     if (!params.useFullCash) {
       if (params.cashForTesting < 10.0) {
@@ -193,13 +193,13 @@ int main(int argc, char** argv) {
   }
   // create the csv file
   std::string currDateTime = printDateTimeFileName();
-  std::string csvFileName = "blackbird_result_" + currDateTime + ".csv";
+  std::string csvFileName = "/var/lib/blackbird/result_" + currDateTime + ".csv";
   std::ofstream csvFile;
   csvFile.open(csvFileName.c_str(), std::ofstream::trunc);
   csvFile << "TRADE_ID,EXCHANGE_LONG,EXHANGE_SHORT,ENTRY_TIME,EXIT_TIME,DURATION,TOTAL_EXPOSURE,BALANCE_BEFORE,BALANCE_AFTER,RETURN\n";
   csvFile.flush();
   // create the log file
-  std::string logFileName = "blackbird_log_" + currDateTime + ".log";
+  std::string logFileName = "/var/log/blackbird/log_" + currDateTime + ".log";
   std::ofstream logFile;
   logFile.open(logFileName.c_str(), std::ofstream::trunc);
   logFile.imbue(mylocale);
